@@ -29,15 +29,13 @@ void print_hands(Card* hand, Card* dealer_hand, int num_cards_hand, int hand_val
 int calculate_sum(Card* hand, int num_cards_hand);
 void print_final_hands(Card* hand, Card* dealer_hand, int num_cards_hand, int num_cards_dealer_hand, int hand_sum, int dealer_hand_sum);
 bool compare_scores(int hand_sum, int dealer_hand_sum, Card** dealer_hand, int* num_cards_dealer_hand);
+void print_banner();
 
 void print_menu() {
-    printf("----BlackJack----");
-    printf("\n1) Start game");
+    printf("1) Start game");
     printf("\n0) Exit");
-    printf("\n----BlackJack----");
     printf("\nChoice: ");
 }
-
 Card* initial_hand(Card* hand, int* num_cards_hand) {
     hand = (Card*) malloc(2 * sizeof(Card));
     if (hand == NULL) {
@@ -50,7 +48,6 @@ Card* initial_hand(Card* hand, int* num_cards_hand) {
     hand[1].suit = rand() % (4);
     return hand;
 }
-
 Card* initial_dealer_hand(Card* dealer_hand, int* num_cards_dealer_hand) {
     dealer_hand = (Card*) malloc(2 * sizeof(Card));
     if (dealer_hand == NULL) {
@@ -63,7 +60,6 @@ Card* initial_dealer_hand(Card* dealer_hand, int* num_cards_dealer_hand) {
     dealer_hand[1].suit = 1 * rand() % (4);
     return dealer_hand;
 }
-
 void print_hands(Card* hand, Card* dealer_hand, int num_cards_hand, int hand_value) {
     printf("\n-------HANDS-------");
     switch (dealer_hand[0].suit) {
@@ -103,7 +99,6 @@ void print_hands(Card* hand, Card* dealer_hand, int num_cards_hand, int hand_val
     printf("\n-------HANDS-------");
     printf("\n");
 }
-
 Card* deal_card(Card* hand, int* num_cards_hand) {
     hand = (Card*) realloc(hand, ((*num_cards_hand) + 1) * sizeof(Card));
     hand[*num_cards_hand].value = 1 * rand() % (10) + 1;
@@ -111,7 +106,6 @@ Card* deal_card(Card* hand, int* num_cards_hand) {
     (*num_cards_hand)++;
     return hand;
 }
-
 int calculate_sum(Card* hand, int num_cards_hand) {
     int sum = 0;
     int i;
@@ -129,7 +123,6 @@ int calculate_sum(Card* hand, int num_cards_hand) {
     }
     return sum;
 }
-
 void print_final_hands(Card* hand, Card* dealer_hand, int num_cards_hand, int num_cards_dealer_hand, int hand_sum, int dealer_hand_sum) {
     printf("\n-------HANDS-------");
     printf("\nDealer Hand: ");
@@ -172,7 +165,6 @@ void print_final_hands(Card* hand, Card* dealer_hand, int num_cards_hand, int nu
     printf("\n-------HANDS-------");
     printf("\n");
 }
-
 bool compare_scores(int hand_sum, int dealer_hand_sum, Card** dealer_hand, int* num_cards_dealer_hand) {
     while (dealer_hand_sum < DEALER_MAX) {
         *dealer_hand = deal_card(*dealer_hand, num_cards_dealer_hand);
@@ -186,9 +178,26 @@ bool compare_scores(int hand_sum, int dealer_hand_sum, Card** dealer_hand, int* 
     }
     return false;
 }
+void print_banner() {
+    printf(
+        "\n"
+        "██████╗ ██╗      █████╗  ██████╗██╗  ██╗     ██╗ █████╗  ██████╗██╗  ██╗\n"
+        "██╔══██╗██║     ██╔══██╗██╔════╝██║ ██╔╝     ██║██╔══██╗██╔════╝██║ ██╔╝\n"
+        "██████╔╝██║     ███████║██║     █████╔╝      ██║███████║██║     █████╔╝ \n"
+        "██╔══██╗██║     ██╔══██║██║     ██╔═██╗ ██   ██║██╔══██║██║     ██╔═██╗ \n"
+        "██████╔╝███████╗██║  ██║╚██████╗██║  ██╗╚█████╔╝██║  ██║╚██████╗██║  ██╗\n"
+        "╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝\n"
+        "\n"
+        "                        Simple Blackjack in C\n"
+        "                           by ShiroiShi\n"
+        "\n"
+    );
+}
+
 
 int main(void) {
     srand(time(NULL));
+    print_banner();
     Menu_Choice menu_choice = 0;
     Card* hand = NULL;
     Card* dealer_hand = NULL;
