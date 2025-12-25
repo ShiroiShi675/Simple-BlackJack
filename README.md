@@ -52,7 +52,7 @@ left out for simplicity:
 
 ## Build and Run
 
-### Linux / macOS (GCC)
+### Linux / macOS
 
 ```bash
 gcc blackjack.c -o blackjack
